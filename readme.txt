@@ -43,7 +43,7 @@ Step 3: Prerequisites to work with this application:
                       
 Step 4: Deploying React to gcloud platform
         1: You must have Docker(https://www.docker.com/get-started) and Google Cloud SDK(https://cloud.google.com/sdk/docs/install) 
-           installed on your computer. Then, Create a gcloud project and enable the following:
+           installed on your computer. Then, Create a gcloud project (react-project) and enable the following:
            a.billing account
            b.Conatiner Registry API
            c. Cloudbuild API
@@ -58,6 +58,7 @@ Step 4: Deploying React to gcloud platform
 
         6: Now type `docker tag <your newest image id> gcr.io/<your project-id>/<project-name>` and hit enter 
             Type `docker images` to see your image id updated with tag name
+            docker tag c17a153545b1 gcr.io/react-project-368815/react-project
 
         7: Type `gcloud init` on cmd and it will prompt Create or select a configuration choose existing configurations and hit enter and
           it will prompt Choose a current Google Cloud project, choose your current gcloud project number and hit enter.
@@ -74,7 +75,10 @@ Step 4: Deploying React to gcloud platform
           and click on create.
             
         11: This will create the service on port 3000 and will generate the url, hit the url.   
+                https://react-project-6xnzi4nloq-uc.a.run.app
 
+        12. github project - react-github-project
+        13. trigger - react-assign-trigger
         
 
 Step 5: To run locally, go to cmd terminal and type following: 

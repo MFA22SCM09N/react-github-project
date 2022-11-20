@@ -22,6 +22,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 // Import custom components
 import BarCharts from "./BarCharts";
+import LineCharts from "./LineCharts";
 import Loader from "./Loader";
 import { ListItemButton } from "@mui/material";
 
@@ -43,6 +44,34 @@ const repositories = [
   {
     key: "d3/d3",
     value: "D3",
+  },
+  {
+    key: "golang/go",
+    value: "Go",
+  },
+  {
+    key: "golang/go-github",
+    value: "Go-Github",
+  },
+  {
+    key: "SebastianM/angular-google-maps",
+    value: "Angular Google Maps",
+  },
+  {
+    key: "facebook/react",
+    value: "React",
+  },
+  {
+    key: "tensorflow/tensorflow",
+    value: "Tensor Flow",
+  },
+  {
+    key: "keras-team/keras",
+    value: "Keras",
+  },
+  {
+    key: "pallets/flask",
+    value: "Flask",
   },
 ];
 
@@ -178,13 +207,18 @@ export default function Home() {
           <div>
             {/* Render barchart component for a monthly created issues for a selected repositories*/}
             <BarCharts
-              title={`Monthly Created Issues for ${repository.value} in last 1 year`}
+              title={`Monthly Created Issues for ${repository.value} in last 2 years`}
               data={githubRepoData?.created}
             />
             {/* Render barchart component for a monthly created issues for a selected repositories*/}
             <BarCharts
-              title={`Monthly Closed Issues for ${repository.value} in last 1 year`}
+              title={`Weekly Closed Issues for ${repository.value} in last 2 years`}
               data={githubRepoData?.closed}
+            />
+            {/* Render linechart component for a selected repositories*/}
+            <LineCharts
+              title={`Issues for ${repository.value} in last 2 years`}
+              data={githubRepoData?.created}
             />
             <Divider
               sx={{ borderBlockWidth: "3px", borderBlockColor: "#FFA500" }}
@@ -194,17 +228,17 @@ export default function Home() {
             <div>
               <Typography variant="h5" component="div" gutterBottom>
                 Timeseries Forecasting of Created Issues using Tensorflow and
-                Keras LSTM based on past month
+                Keras LSTM, Prophet, and Stast Model
               </Typography>
 
               <div>
                 <Typography component="h4">
-                  Model Loss for Created Issues
+                  LSTM Model Loss for Created Issues
                 </Typography>
                 {/* Render the model loss image for created issues */}
                 <img
                   src={githubRepoData?.createdAtImageUrls?.model_loss_image_url}
-                  alt={"Model Loss for Created Issues"}
+                  alt={"LSTM Model Loss for Created Issues"}
                   loading={"lazy"}
                 />
               </div>
@@ -223,14 +257,58 @@ export default function Home() {
               </div>
               <div>
                 <Typography component="h4">
-                  All Issues Data for Created Issues
+                  LSTM All Issues Data for Created Issues
                 </Typography>
                 {/* Render the all issues data image for created issues*/}
                 <img
                   src={
                     githubRepoData?.createdAtImageUrls?.all_issues_data_image
                   }
-                  alt={"All Issues Data for Created Issues"}
+                  alt={"LSTM All Issues Data for Created Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  Prophet Forecast for Created Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.createdAtImageUrls?.prophet_forecast_image_url}
+                  alt={"Prophet Forecast for Created Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  Prophet Line Component Forecast for Created Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.createdAtImageUrls?.prophet_forecast_image_line_url}
+                  alt={"Prophet Line Component Forecast for Created Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  Model stats Forecast for Created Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.createdAtImageUrls?.stats_model_forecast_image_url}
+                  alt={"Model stats Forecast for Created Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  Model stats line Component for Created Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.createdAtImageUrls?.stats_model_image_line_url}
+                  alt={"Model stats line Component for Created Issues"}
                   loading={"lazy"}
                 />
               </div>
@@ -243,17 +321,17 @@ export default function Home() {
               />
               <Typography variant="h5" component="div" gutterBottom>
                 Timeseries Forecasting of Closed Issues using Tensorflow and
-                Keras LSTM based on past month
+                Keras LSTM, Prophet and Stats Model
               </Typography>
 
               <div>
                 <Typography component="h4">
-                  Model Loss for Closed Issues
+                  LSTM Model Loss for Closed Issues
                 </Typography>
                 {/* Render the model loss image for closed issues  */}
                 <img
                   src={githubRepoData?.closedAtImageUrls?.model_loss_image_url}
-                  alt={"Model Loss for Closed Issues"}
+                  alt={"LSTM Model Loss for Closed Issues"}
                   loading={"lazy"}
                 />
               </div>
@@ -272,12 +350,238 @@ export default function Home() {
               </div>
               <div>
                 <Typography component="h4">
-                  All Issues Data for Closed Issues
+                  LSTM All Issues Data for Closed Issues
                 </Typography>
                 {/* Render the all issues data image for closed issues*/}
                 <img
                   src={githubRepoData?.closedAtImageUrls?.all_issues_data_image}
-                  alt={"All Issues Data for Closed Issues"}
+                  alt={"LSTM All Issues Data for Closed Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  Prophet Forecast for Closed Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.closedAtImageUrls?.prophet_forecast_image_url}
+                  alt={"Prophet Forecast for Closed Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  Prophet Line Component Forecast for Closed Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.closedAtImageUrls?.prophet_forecast_image_line_url}
+                  alt={"Prophet Line Component Forecast for Closed Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                Model stats Forecast for Closed Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.closedAtImageUrls?.stats_model_forecast_image_url}
+                  alt={"Model stats Forecast for Closed Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                Model stats line Component Forecast for Closed Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.closedAtImageUrls?.stats_model_image_line_url}
+                  alt={"Model stats line Component Forecast for Closed Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+            </div>
+            {/* Rendering Timeseries Forecasting of Pull requests using Tensorflow and
+                Keras LSTM  */}
+            <div>
+              <Divider
+                sx={{ borderBlockWidth: "3px", borderBlockColor: "#FFA500" }}
+              />
+              <Typography variant="h5" component="div" gutterBottom>
+                Timeseries Forecasting of Pull requests using Tensorflow and
+                Keras LSTM, Prophet and Stats Model
+              </Typography>
+
+              <div>
+                <Typography component="h4">
+                  LSTM Model Loss for Pull Requests
+                </Typography>
+                {/* Render the model loss image for Pull Requests  */}
+                <img
+                  src={githubRepoData?.pullImageUrls?.model_loss_image_url}
+                  alt={"LSTM Model Loss for Pull Requests"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  LSTM Generated Data for Pull Requests
+                </Typography>
+                {/* Render the LSTM generated image for Pull Requests */}
+                <img
+                  src={
+                    githubRepoData?.pullImageUrls?.lstm_generated_image_url
+                  }
+                  alt={"LSTM Generated Data for Pull Requests"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  LSTM All Issues Data for Pull Requests
+                </Typography>
+                {/* Render the all issues data image for Pull Requests*/}
+                <img
+                  src={githubRepoData?.pullImageUrls?.all_issues_data_image}
+                  alt={"LSTM All Issues Data for Pull Requests"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  Prophet Forecast for Closed Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.pullImageUrls?.prophet_forecast_image_url}
+                  alt={"Prophet Forecast for Closed Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  Prophet Line Component Forecast for Closed Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.pullImageUrls?.prophet_forecast_image_line_url}
+                  alt={"Prophet Line Component Forecast for Closed Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                Model stats Forecast for Closed Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.pullImageUrls?.stats_model_forecast_image_url}
+                  alt={"Model stats Forecast for Closed Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                Model stats line Component Forecast for Closed Issues
+                </Typography>
+                {/* Render the all issues data image for closed issues*/}
+                <img
+                  src={githubRepoData?.pullImageUrls?.stats_model_image_line_url}
+                  alt={"Model stats line Component Forecast for Closed Issues"}
+                  loading={"lazy"}
+                />
+              </div>
+            </div>
+            {/* Rendering Timeseries Forecasting of Commits using Tensorflow and
+                Keras LSTM  */}
+            <div>
+              <Divider
+                sx={{ borderBlockWidth: "3px", borderBlockColor: "#FFA500" }}
+              />
+              <Typography variant="h5" component="div" gutterBottom>
+                Timeseries Forecasting of Commits using Tensorflow and
+                Keras LSTM, Prophet and Stats Model
+              </Typography>
+
+              <div>
+                <Typography component="h4">
+                  LSTM Model Loss for Commits
+                </Typography>
+                {/* Render the model loss image for Commits  */}
+                <img
+                  src={githubRepoData?.commitImageUrls?.model_loss_image_url}
+                  alt={"LSTM Model Loss for Commits"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  LSTM Generated Data for Commits
+                </Typography>
+                {/* Render the LSTM generated image for Commits */}
+                <img
+                  src={
+                    githubRepoData?.commitImageUrls?.lstm_generated_image_url
+                  }
+                  alt={"LSTM Generated Data for Commits"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  LSTM All Issues Data for Commits
+                </Typography>
+                {/* Render the all issues data image for Commits*/}
+                <img
+                  src={githubRepoData?.commitImageUrls?.all_issues_data_image}
+                  alt={"LSTM All Issues Data for Commits"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  Prophet Forecast for Commits
+                </Typography>
+                {/* Render the all issues data image for Commits*/}
+                <img
+                  src={githubRepoData?.commitImageUrls?.prophet_forecast_image_url}
+                  alt={"Prophet Forecast for Commits"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                  Prophet Line Component Forecast for Commits
+                </Typography>
+                {/* Render the all issues data image for Commits*/}
+                <img
+                  src={githubRepoData?.commitImageUrls?.prophet_forecast_image_line_url}
+                  alt={"Prophet Line Component Forecast for Commits"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                Model stats Forecast for Commits
+                </Typography>
+                {/* Render the all issues data image for Commits*/}
+                <img
+                  src={githubRepoData?.commitImageUrls?.stats_model_forecast_image_url}
+                  alt={"Model stats Forecast for Commits"}
+                  loading={"lazy"}
+                />
+              </div>
+              <div>
+                <Typography component="h4">
+                Model stats line Component Forecast for Commits
+                </Typography>
+                {/* Render the all issues data image for Commits*/}
+                <img
+                  src={githubRepoData?.commitImageUrls?.stats_model_image_line_url}
+                  alt={"Model stats line Component Forecast for Commits"}
                   loading={"lazy"}
                 />
               </div>
